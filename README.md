@@ -1,6 +1,6 @@
 # toy-shell
 
-* Project #1 (Make Your Own Shell)
+####  Project #1 (Make Your Own Shell)
 
 * This code must be compiled from 'Linux' (Ubuntu 20.04).LTS)
 
