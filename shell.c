@@ -75,29 +75,29 @@ int main(void) {
 	    	if (pid < 0) {
        	        fprintf(stderr, "fork failed\n");
          	exit(1);
-        }
-       	if (pid != 0) {  /* parent */
-        	cpid = waitpid(pid, &status, 0);
-           	if (cpid != pid) {
-                fprintf(stderr, "waitpid failed\n");
         	}
-                printf("\nChild process terminated\n");
-        	if (WIFEXITED(status)) {
-              	    printf("Exit status is %d\n", WEXITSTATUS(status));
-        	}
-       	}
-	else {	/* child */
-	        strcat(bin,arg1);
-        	arg1 = bin;
-	       	args[0] = arg1;
-   	    	args[1] = strtok(NULL," ");
-    	        args[2] = strtok(NULL," ");
-    	    	args[3] = strtok(NULL," ");
+       		if (pid != 0) {  /* parent */
+        		cpid = waitpid(pid, &status, 0);
+           		if (cpid != pid) {
+            	  	  fprintf(stderr, "waitpid failed\n");
+        		}
+            	        printf("\nChild process terminated\n");
+        		if (WIFEXITED(status)) {
+              		    printf("Exit status is %d\n", WEXITSTATUS(status));
+        		}
+       		}
+		else {	/* child */
+	        	strcat(bin,arg1);
+        		arg1 = bin;
+	   	    	args[0] = arg1;
+   	  	  	args[1] = strtok(NULL," ");
+    	  	        args[2] = strtok(NULL," ");
+    	  	  	args[3] = strtok(NULL," ");
 
-	        ret = execve(args[0], args, NULL);
- 		if (ret < 0) {
-            		fprintf(stderr, "execve failed\n");
-               	  	return 1;
+	    		ret = execve(args[0], args, NULL);
+ 			if (ret < 0) {
+            			fprintf(stderr, "execve failed\n");
+				return 1;
    			}
    		}
 	}
