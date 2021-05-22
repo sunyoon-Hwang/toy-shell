@@ -14,8 +14,6 @@
 #define _MAX_PATH 	260
 #endif
 
-int parse_background(char *cmd);
-
 int main(void) {
     char command[MAX_LEN_LINE];
     char *arg1, *arg2, *arg3;
@@ -32,10 +30,10 @@ int main(void) {
         int len;
         bool cd = false;
 
-	char strBuffer[_MAX_PATH] = { 0, };
-	char *pstrBuffer = NULL;
-	pstrBuffer = getcwd( strBuffer, _MAX_PATH );
-	char bin[30] = "/bin/";
+	    char strBuffer[_MAX_PATH] = { 0, };
+	    char *pstrBuffer = NULL;
+	    pstrBuffer = getcwd( strBuffer, _MAX_PATH );
+	    char bin[30] = "/bin/";
 
         printf("\033[92m%s@%s\033[0m:\033[94m%s\033[0m$ ",getpwuid(getuid())->pw_name,hostname,pstrBuffer);
         s = fgets(command, MAX_LEN_LINE, stdin);
@@ -52,29 +50,29 @@ int main(void) {
 
     	if(!strcmp(command,"exit")){
 	    	printf("program exit!\n");
-		exit(0);
+		    exit(0);
     	}
 
-	arg1 = strtok(command," ");
+	    arg1 = strtok(command," ");
 
     	if(!strcmp(arg1,"cd")){
 	    	cd = true;
-		arg1 = strtok(NULL, " ");
-		if(chdir(arg1)<0){
-		    printf("ERROR : Inexistence Directory [%s].\n",arg1);
-		    continue;
-		}
-		else{
-		    printf("change directory successfully!\n");
-		    continue;
-		}
-	 }
+		    arg1 = strtok(NULL, " ");
+		    if(chdir(arg1)<0){
+			    printf("ERROR : Inexistence Directory [%s].\n",arg1);
+			    continue;
+		    }
+		    else{
+			    printf("change directory successfully!\n");
+			    continue;
+		    }
+	    }
 
         printf("[%s]\n\n", command);
 
-	if(!cd) {
-	    pid = fork();
-	    if (pid < 0) {
+	    if(!cd) {
+		    pid = fork();
+	    	if (pid < 0) {
        	        fprintf(stderr, "fork failed\n");
          	    exit(1);
             }
@@ -93,16 +91,16 @@ int main(void) {
         		arg1 = bin;
 	        	args[0] = arg1;
    		    	args[1] = strtok(NULL," ");
-    		        args[2] = strtok(NULL," ");
-    	    		args[3] = strtok(NULL," ");
-	    
+    		    args[2] = strtok(NULL," ");
+    	    	args[3] = strtok(NULL," ");
+
 		        ret = execve(args[0], args, NULL);
    			    if (ret < 0) {
             	    fprintf(stderr, "execve failed\n");
-               	    return 1;
+               	   	return 1;
    			    }
    		    }
 	    }
-    }	
+    }
     return 0;
 }
